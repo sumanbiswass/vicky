@@ -1,52 +1,81 @@
-name: Update Jio (_hdnea_) + Zee5 (hdntl) tokens in vicky.json
+name: Update (__hdnea__) + (hdntl) tokens in vicky.json
 
 on:
   schedule:
-    - cron: '0 */12 * * *'  # every 12 hours
+    # run every 11 hours
+    - cron: "0 */11 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  update-m3u-tokens:
+  update-json-tokens:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main            # change if your default branch is different
 
-    - name: Fetch remote playlists and extract tokens
-      run: |
-        # Fetch JioTV playlist for _hdnea_ token
-        curl -sL -o jio.m3u "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u"
-        jio_cookie=$(grep -o '_hdnea_=[^"]*' jio.m3u | head -n1)
-        echo "$jio_cookie" > jio_cookie.txt
+      - name: Fetch remote playlists and extract tokens
+        run: |
+          set -euo pipefail
 
-        # Fetch Zee5 playlist for hdntl token
-        curl -sL -o zee.m3u "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/z5.m3u"
-        zee_hdntl=$(grep -o 'hdntl=[^"]*' zee.m3u | head -n1)
-        echo "$zee_hdntl" > zee_hdntl.txt
+          # Download playlists
+          curl -sL -o jio.m3u \
+            "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u"
+          curl -sL -o zee.m3u \
+            "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/z5.m3u"
 
-    - name: Update tokens in vicky.json
-      run: |
-        jio_cookie=$(cat jio_cookie.txt)
-        zee_hdntl=$(cat zee_hdntl.txt)
+          # Extract the first matching token from each file (-m1 prevents broken-pipe errors)
+          jio_cookie=$(grep -m1 -o '__hdnea__=[^"& ]*' jio.m3u || true)
+          zee_hdntl=$(grep -m1 -o 'hdntl=[^"& ]*'   zee.m3u || true)
 
-        # Replace Jio (_hdnea_) in both Cookie headers and stream URLs
-        sed -i "s#_hdnea_=[^& ]*#${jio_cookie}#g" vicky.json
-        sed -i "s#cookie=_hdnea_=[^& ]*#cookie=${jio_cookie}#g" vicky.json
+          # Fail if tokens are missing
+          if [ -z "$jio_cookie" ] || [ -z "$zee_hdntl" ]; then
+            echo "Token fetch failed—aborting to avoid blank replacements."
+            exit 1
+          fi
 
-        # Replace Zee5 (hdntl) in both Cookie headers and stream URLs
-        sed -i "s#hdntl=[^& ]*#${zee_hdntl}#g" vicky.json
-        sed -i "s#cookie=hdntl=[^& ]*#cookie=${zee_hdntl}#g" vicky.json
+          echo "$jio_cookie" > jio_cookie.txt
+          echo "$zee_hdntl"  > zee_hdntl.txt
 
-    - name: Commit and push changes
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git add vicky.json
-        git commit -m "Auto-update _hdnea_ and hdntl tokens in vicky.json" || echo "No changes"
-        git push
+      - name: Update tokens in vicky.json
+        run: |
+          set -euo pipefail
+          jio_cookie=$(cat jio_cookie.txt)
+          zee_hdntl=$(cat zee_hdntl.txt)
+
+          # This jq script:
+          #   * updates every object that has a stream_url containing "jio" (case-insensitive)
+          #   * updates every object that has a stream_url containing "zee" (case-insensitive)
+          #   * replaces both the query token and any cookie field
+          jq --arg jio "$jio_cookie" --arg zee "$zee_hdntl" '
+            map(
+              if (has("stream_url") and (.stream_url | test("jio"; "i"))) then
+                .cookie     = $jio |
+                .stream_url |= sub("__hdnea__=[^&]*"; $jio) |
+                .stream_url |= sub("cookie=__hdnea__=[^&]*"; "cookie=" + $jio)
+
+              elif (has("stream_url") and (.stream_url | test("zee"; "i"))) then
+                .cookie     = $zee |
+                .stream_url |= sub("hdntl=[^&]*"; $zee) |
+                .stream_url |= sub("cookie=hdntl=[^&]*"; "cookie=" + $zee)
+
+              else
+                .
+              end
+            )
+          ' vicky.json > temp.json && mv temp.json vicky.json
+
+      - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name  "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add vicky.json
+          git commit -m "Auto-update __hdnea__ and hdntl tokens in vicky.json" || echo "No changes to commit"
+          git push
