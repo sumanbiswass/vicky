@@ -408,7 +408,7 @@
     "id": "sony-aath",
     "title": "Sony Aath",
     "logo_url": "https://i.postimg.cc/bY12WVTm/SONY-AATH.png",
-    "stream_url": "https://tataplay.slivcdn.com/hls/live/2011641/SonyAathSD/master.m3u8",
+    "stream_url": "https://dish.slivcdn.com/hls/live/2011641/SonyAathSD/master.m3u8",
     "license_url": "",
     "user_agent": "",
     "cookie": ""
@@ -417,7 +417,7 @@
     "id": "sony-max-hd",
     "title": "Sony MAX HD",
     "logo_url": "https://i.postimg.cc/XYF71G8F/SONY-MAX-HD.png",
-    "stream_url": "https://tataplay.slivcdn.com/hls/live/2011670/SonyMaxhd/master.m3u8",
+    "stream_url": "https://dish.slivcdn.com/hls/live/2011670/SonyMaxhd/master.m3u8",
     "license_url": "",
     "user_agent": "",
     "cookie": ""
@@ -426,7 +426,7 @@
     "id": "sony-max-2",
     "title": "Sony MAX 2",
     "logo_url": "https://raw.githubusercontent.com/br8828982/M3U/refs/heads/main/Sony_MAX2.png",
-    "stream_url": "https://tataplay.slivcdn.com/hls/live/2011908/MAX2/master.m3u8",
+    "stream_url": "https://dish.slivcdn.com/hls/live/2011908/MAX2/master.m3u8",
     "license_url": "",
     "user_agent": "",
     "cookie": ""
