@@ -102,7 +102,7 @@
     "id": "sony-ten-2-hd",
     "title": "Sony Sports Ten 2 HD",
     "logo_url": "https://i.postimg.cc/wvfsmLrC/SONY-SPORTS-TEN-2-HD.png",
-    "stream_url": "https://dish.slivcdn.com/hls/live/2020434/TEN2HD/master.m3u8",
+    "stream_url": "https://dish.slivcdn.com//hls/live/2020434/TEN2HD/master.m3u8",
     "license_url": "",
     "user_agent": "",
     "cookie": ""
@@ -111,7 +111,7 @@
     "id": "sony-ten-3-hd",
     "title": "Sony Sports Ten 3 HD",
     "logo_url": "https://i.postimg.cc/2SGvDswj/SONY-SPORTS-TEN-3-HD.png",
-    "stream_url": "https://dish.slivcdn.com/hls/live/2020591/TEN3HD/master.m3u8",
+    "stream_url": "https://dish.slivcdn.com//hls/live/2020591/TEN3HD/master.m3u8",
     "license_url": "",
     "user_agent": "",
     "cookie": ""
@@ -120,7 +120,7 @@
     "id": "sony-ten-4-hd",
     "title": "Sony Sports Ten 4 HD",
     "logo_url": "https://www.sonypicturesnetworks.com/images/logos/SONY_SportsTen4_HD_Logo_CLR.png",
-    "stream_url": "https://dish.slivcdn.com/hls/live/2020589/ten4hd/master.m3u8",
+    "stream_url": "https://dish.slivcdn.com//hls/live/2020589/ten4hd/master.m3u8",
     "license_url": "",
     "user_agent": "",
     "cookie": ""
@@ -129,7 +129,7 @@
     "id": "sony-ten-5-hd",
     "title": "Sony Sports Ten 5 HD",
     "logo_url": "https://i.postimg.cc/xCzcchKz/SONY-SPORTS-TEN-5-HD.png",
-    "stream_url": "https://dish.slivcdn.com/hls/live/2020593/SONYSIXHD/master.m3u8",
+    "stream_url": "https://dish.slivcdn.com//hls/live/2020593/SONYSIXHD/master.m3u8",
     "license_url": "",
     "user_agent": "",
     "cookie": ""
