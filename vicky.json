@@ -15,7 +15,7 @@
     "stream_url": "https://z5ak-cmaflive.zee5.com/cmaf/live/2105511/ZEE24GHANTAELE/master.m3u8?",
     "license_url": "",
     "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 ygx/69.1 Safari/537.36",
-    "cookie": "hdntl=exp=1758244814~acl=%2f*~data=hdntl~hmac=1f460c617e71ddb911dd12e5881aff663df32d9403a50fad39d41552f218932d"
+    "cookie": ""
   },
   {
     "id": "1735",
@@ -438,7 +438,7 @@
     "stream_url": "https://z5ak-cmaflive.zee5.com/cmaf/live/2105540/ZeeCinemaHDELE/index-connected.m3u8?",
     "license_url": "",
     "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 ygx/69.1 Safari/537.36",
-    "cookie": "hdntl=exp=1758244814~acl=%2f*~data=hdntl~hmac=1f460c617e71ddb911dd12e5881aff663df32d9403a50fad39d41552f218932d"
+    "cookie": ""
   },
   {
     "id": "0-9-zeebanglacinema",
@@ -447,7 +447,7 @@
     "stream_url": "https://z5ak-cmaflive.zee5.com/cmaf/live/2105524/ZeeBanglaCinemaELE/master.m3u8?",
     "license_url": "",
     "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 ygx/69.1 Safari/537.36",
-    "cookie": "hdntl=exp=1758244814~acl=%2f*~data=hdntl~hmac=1f460c617e71ddb911dd12e5881aff663df32d9403a50fad39d41552f218932d"
+    "cookie": ""
   },
   {
     "id": "0-9-zeebangla",
@@ -456,7 +456,7 @@
     "stream_url": "https://z5ak-cmaflive.zee5.com/cmaf/live/2105554/ZeeBanglaHDELE/index-connected.m3u8?",
     "license_url": "",
     "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 ygx/69.1 Safari/537.36",
-    "cookie": "hdntl=exp=1758244814~acl=%2f*~data=hdntl~hmac=1f460c617e71ddb911dd12e5881aff663df32d9403a50fad39d41552f218932d"
+    "cookie": ""
   },
   {
     "id": "0-9-tvpictureshd",
@@ -465,7 +465,7 @@
     "stream_url": "https://z5ak-cmaflive.zee5.com/cmaf/live/2105174/ANDPicturesHDELE/index-connected.m3u8?",
     "license_url": "",
     "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 ygx/69.1 Safari/537.36",
-    "cookie": "hdntl=exp=1758244814~acl=%2f*~data=hdntl~hmac=1f460c617e71ddb911dd12e5881aff663df32d9403a50fad39d41552f218932d"
+    "cookie": ""
   },
   {
     "id": "moviesnow-hd",
