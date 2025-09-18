@@ -14,30 +14,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4   # latest stable version
+      # Checkout the branch that contains vicky.json
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main          # change if your default branch is different
 
       - name: Fetch remote playlists and extract tokens
         run: |
           set -euo pipefail
 
-          # Fetch JioTV playlist for __hdnea__ token
+          # Download playlists
           curl -sL -o jio.m3u \
             "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u"
-          jio_cookie=$(grep -m1 -o '__hdnea__=[^"]*' jio.m3u || true)
-          echo "$jio_cookie" > jio_cookie.txt
-
-          # Fetch playlist for hdntl token
           curl -sL -o zee.m3u \
             "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/z5.m3u"
-          zee_hdntl=$(grep -m1 -o 'hdntl=[^"]*' zee.m3u || true)
-          echo "$zee_hdntl" > zee_hdntl.txt
 
-          # Stop if either token is missing
+          # Extract tokens (use -m1 to avoid broken-pipe errors)
+          jio_cookie=$(grep -m1 -o '__hdnea__=[^"]*' jio.m3u || true)
+          zee_hdntl=$(grep -m1 -o 'hdntl=[^"]*' zee.m3u || true)
+
+          # Fail early if tokens are missing
           if [ -z "$jio_cookie" ] || [ -z "$zee_hdntl" ]; then
             echo "Token fetch failed, aborting."
             exit 1
           fi
+
+          echo "$jio_cookie" > jio_cookie.txt
+          echo "$zee_hdntl" > zee_hdntl.txt
 
       - name: Update tokens in vicky.json
         run: |
@@ -45,7 +49,7 @@ jobs:
           jio_cookie=$(cat jio_cookie.txt)
           zee_hdntl=$(cat zee_hdntl.txt)
 
-          # Update both tokens using jq (requires jq 1.6+)
+          # Adjust path here if vicky.json is in a folder (e.g., data/vicky.json)
           jq --arg jio "$jio_cookie" --arg zee "$zee_hdntl" '
             map(
               if (.stream_url | test("jiotvmblive.cdn.jio.com")) then
@@ -67,6 +71,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add vicky.json
+          git add vicky.json           # adjust path if you moved the file
           git commit -m "Auto-update __hdnea__ and hdntl tokens in vicky.json" || echo "No changes to commit"
           git push
