@@ -2,7 +2,7 @@ name: Update (__hdnea__) + (hdntl) tokens in vicky.json
 
 on:
   schedule:
-    # every 11 hours
+    # run every 11 hours
     - cron: "0 */11 * * *"
   workflow_dispatch:
 
@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4   # newer stable version
+        uses: actions/checkout@v4   # latest stable version
 
       - name: Fetch remote playlists and extract tokens
         run: |
@@ -24,16 +24,16 @@ jobs:
           # Fetch JioTV playlist for __hdnea__ token
           curl -sL -o jio.m3u \
             "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u"
-          jio_cookie=$(grep -o '__hdnea__=[^"]*' jio.m3u | head -n1)
+          jio_cookie=$(grep -m1 -o '__hdnea__=[^"]*' jio.m3u || true)
           echo "$jio_cookie" > jio_cookie.txt
 
           # Fetch playlist for hdntl token
           curl -sL -o zee.m3u \
             "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/z5.m3u"
-          zee_hdntl=$(grep -o 'hdntl=[^"]*' zee.m3u | head -n1)
+          zee_hdntl=$(grep -m1 -o 'hdntl=[^"]*' zee.m3u || true)
           echo "$zee_hdntl" > zee_hdntl.txt
 
-          # Basic sanity check so we don’t overwrite with blanks
+          # Stop if either token is missing
           if [ -z "$jio_cookie" ] || [ -z "$zee_hdntl" ]; then
             echo "Token fetch failed, aborting."
             exit 1
