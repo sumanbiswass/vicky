@@ -1,9 +1,9 @@
-name: Update (__hdnea__) + (hdntl) tokens in vicky.json
+name: Update  (__hdnea__) +  (hdntl) tokens in vicky.json
 
 on:
   schedule:
-    - cron: '0 */11 * * *'   # every 11 hours
-  workflow_dispatch:
+    - cron: '0 */11 * * *'  # every 12 hours
+  workflow_dispatch: 
 
 permissions:
   contents: write
@@ -18,13 +18,13 @@ jobs:
 
     - name: Fetch remote playlists and extract tokens
       run: |
-        # Fetch JioTV playlist for __hdnea__ token (new link)
-        curl -sL -o jio.m3u "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u"
+        # Fetch JioTV playlist for __hdnea__ token
+        curl -sL -o jio.m3u "https://raw.githubusercontent.com/alex4528/m3u/refs/heads/main/jstar.m3u"
         jio_cookie=$(grep -o '__hdnea__=[^"]*' jio.m3u | head -n1)
         echo "$jio_cookie" > jio_cookie.txt
 
-        # Fetch playlist for hdntl token (new link)
-        curl -sL -o zee.m3u "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/z5.m3u"
+        # Fetch playlist for hdntl token
+        curl -sL -o zee.m3u "https://raw.githubusercontent.com/alex4528/m3u/refs/heads/main/z5.m3u"
         zee_hdntl=$(grep -o 'hdntl=[^"]*' zee.m3u | head -n1)
         echo "$zee_hdntl" > zee_hdntl.txt
 
@@ -58,3 +58,4 @@ jobs:
         git add vicky.json
         git commit -m "Auto-update __hdnea__ and hdntl tokens in vicky.json" || echo "No changes"
         git push
+        
