@@ -12,10 +12,10 @@
     "id": "0-9-24ghantatv",
     "title": "Zee 24 Ghanta",
     "logo_url": "https://jiotvimages.cdn.jio.com/dare_images/images/24_Ghanta_TV.png",
-    "stream_url": "https://z5ak-cmaflive.zee5.com/cmaf/live/2105511/ZEE24GHANTAELE/master.m3u8?hdntl=exp=1758285448~acl=%2f*~data=hdntl~hmac=2f0aac62f8048ebe68edccbaf7c3bf2ad12cb19e117a65bb4a34a56d22fc92bb",
+    "stream_url": "https://z5ak-cmaflive.zee5.com/cmaf/live/2105511/ZEE24GHANTAELE/master.m3u8?hdntl=exp=1758331367~acl=%2f*~data=hdntl~hmac=fd8f861854cd417355280bed3d0e84690dd900a8874a7c9ef47094770b945751",
     "license_url": "",
     "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 ygx/69.1 Safari/537.36",
-    "cookie": "hdntl=exp=1758285448~acl=%2f*~data=hdntl~hmac=2f0aac62f8048ebe68edccbaf7c3bf2ad12cb19e117a65bb4a34a56d22fc92bb"
+    "cookie": "hdntl=exp=1758331367~acl=%2f*~data=hdntl~hmac=fd8f861854cd417355280bed3d0e84690dd900a8874a7c9ef47094770b945751"
   },
   {
     "id": "1735",
@@ -435,37 +435,37 @@
     "id": "0-9-zeecinemahd",
     "title": "Zee Cinema HD",
     "logo_url": "https://jiotvimages.cdn.jio.com/dare_images/images/Zee_Cinema_HD.png",
-    "stream_url": "https://z5ak-cmaflive.zee5.com/cmaf/live/2105540/ZeeCinemaHDELE/index-connected.m3u8?hdntl=exp=1758285448~acl=%2f*~data=hdntl~hmac=2f0aac62f8048ebe68edccbaf7c3bf2ad12cb19e117a65bb4a34a56d22fc92bb",
+    "stream_url": "https://z5ak-cmaflive.zee5.com/cmaf/live/2105540/ZeeCinemaHDELE/index-connected.m3u8?hdntl=exp=1758331367~acl=%2f*~data=hdntl~hmac=fd8f861854cd417355280bed3d0e84690dd900a8874a7c9ef47094770b945751",
     "license_url": "",
     "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 ygx/69.1 Safari/537.36",
-    "cookie": "hdntl=exp=1758285448~acl=%2f*~data=hdntl~hmac=2f0aac62f8048ebe68edccbaf7c3bf2ad12cb19e117a65bb4a34a56d22fc92bb"
+    "cookie": "hdntl=exp=1758331367~acl=%2f*~data=hdntl~hmac=fd8f861854cd417355280bed3d0e84690dd900a8874a7c9ef47094770b945751"
   },
   {
     "id": "0-9-zeebanglacinema",
     "title": "Zee Bangla Cinema",
     "logo_url": "https://jiotvimages.cdn.jio.com/dare_images/images/Zee_Bangla_Cinema.png",
-    "stream_url": "https://z5ak-cmaflive.zee5.com/cmaf/live/2105524/ZeeBanglaCinemaELE/master.m3u8?hdntl=exp=1758285448~acl=%2f*~data=hdntl~hmac=2f0aac62f8048ebe68edccbaf7c3bf2ad12cb19e117a65bb4a34a56d22fc92bb",
+    "stream_url": "https://z5ak-cmaflive.zee5.com/cmaf/live/2105524/ZeeBanglaCinemaELE/master.m3u8?hdntl=exp=1758331367~acl=%2f*~data=hdntl~hmac=fd8f861854cd417355280bed3d0e84690dd900a8874a7c9ef47094770b945751",
     "license_url": "",
     "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 ygx/69.1 Safari/537.36",
-    "cookie": "hdntl=exp=1758285448~acl=%2f*~data=hdntl~hmac=2f0aac62f8048ebe68edccbaf7c3bf2ad12cb19e117a65bb4a34a56d22fc92bb"
+    "cookie": "hdntl=exp=1758331367~acl=%2f*~data=hdntl~hmac=fd8f861854cd417355280bed3d0e84690dd900a8874a7c9ef47094770b945751"
   },
   {
     "id": "0-9-zeebangla",
     "title": "Zee Bangla HD",
     "logo_url": "https://jiotvimages.cdn.jio.com/dare_images/images/Zee_Bangla_HD.png",
-    "stream_url": "https://z5ak-cmaflive.zee5.com/cmaf/live/2105554/ZeeBanglaHDELE/index-connected.m3u8?hdntl=exp=1758285448~acl=%2f*~data=hdntl~hmac=2f0aac62f8048ebe68edccbaf7c3bf2ad12cb19e117a65bb4a34a56d22fc92bb",
+    "stream_url": "https://z5ak-cmaflive.zee5.com/cmaf/live/2105554/ZeeBanglaHDELE/index-connected.m3u8?hdntl=exp=1758331367~acl=%2f*~data=hdntl~hmac=fd8f861854cd417355280bed3d0e84690dd900a8874a7c9ef47094770b945751",
     "license_url": "",
     "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 ygx/69.1 Safari/537.36",
-    "cookie": "hdntl=exp=1758285448~acl=%2f*~data=hdntl~hmac=2f0aac62f8048ebe68edccbaf7c3bf2ad12cb19e117a65bb4a34a56d22fc92bb"
+    "cookie": "hdntl=exp=1758331367~acl=%2f*~data=hdntl~hmac=fd8f861854cd417355280bed3d0e84690dd900a8874a7c9ef47094770b945751"
   },
   {
     "id": "0-9-tvpictureshd",
     "title": "&Pictures HD",
     "logo_url": "https://jiotvimages.cdn.jio.com/dare_images/images/And_Pictures_HD.png",
-    "stream_url": "https://z5ak-cmaflive.zee5.com/cmaf/live/2105174/ANDPicturesHDELE/index-connected.m3u8?hdntl=exp=1758285448~acl=%2f*~data=hdntl~hmac=2f0aac62f8048ebe68edccbaf7c3bf2ad12cb19e117a65bb4a34a56d22fc92bb",
+    "stream_url": "https://z5ak-cmaflive.zee5.com/cmaf/live/2105174/ANDPicturesHDELE/index-connected.m3u8?hdntl=exp=1758331367~acl=%2f*~data=hdntl~hmac=fd8f861854cd417355280bed3d0e84690dd900a8874a7c9ef47094770b945751",
     "license_url": "",
     "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 ygx/69.1 Safari/537.36",
-    "cookie": "hdntl=exp=1758285448~acl=%2f*~data=hdntl~hmac=2f0aac62f8048ebe68edccbaf7c3bf2ad12cb19e117a65bb4a34a56d22fc92bb"
+    "cookie": "hdntl=exp=1758331367~acl=%2f*~data=hdntl~hmac=fd8f861854cd417355280bed3d0e84690dd900a8874a7c9ef47094770b945751"
   },
   {
     "id": "moviesnow-hd",
