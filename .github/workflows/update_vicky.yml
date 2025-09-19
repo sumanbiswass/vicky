@@ -1,9 +1,9 @@
-name: Update  (__hdnea__) +  (hdntl) tokens in vicky.json
+name: Update (__hdnea__) + (hdntl) tokens in vicky.json
 
 on:
   schedule:
-    - cron: '0 */11 * * *'  # every 12 hours
-  workflow_dispatch: 
+    - cron: '0 */11 * * *'  # every 11 hours
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -20,12 +20,12 @@ jobs:
       run: |
         # Fetch JioTV playlist for __hdnea__ token
         curl -sL -o jio.m3u "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u"
-        jio_cookie=$(grep -o '__hdnea__=[^"]*' jio.m3u | head -n1)
+        jio_cookie=$(grep -oP '__hdnea__=[^&]*' jio.m3u | head -n1)
         echo "$jio_cookie" > jio_cookie.txt
 
         # Fetch playlist for hdntl token
         curl -sL -o zee.m3u "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/z5.m3u"
-        zee_hdntl=$(grep -o 'hdntl=[^"]*' zee.m3u | head -n1)
+        zee_hdntl=$(grep -oP 'hdntl=[^&]*' zee.m3u | head -n1)
         echo "$zee_hdntl" > zee_hdntl.txt
 
     - name: Update tokens in vicky.json
@@ -33,13 +33,12 @@ jobs:
         jio_cookie=$(cat jio_cookie.txt)
         zee_hdntl=$(cat zee_hdntl.txt)
 
-        # Use jq to update both tokens (requires jq 1.6+)
+        # Update JSON with jq
         jq --arg jio "$jio_cookie" --arg zee "$zee_hdntl" '
           map(
             if (.stream_url | test("jiotvmblive.cdn.jio.com")) then
               .cookie = $jio |
-              .stream_url |= sub("__hdnea__=[^&]*"; $jio) |
-              .stream_url |= sub("cookie=__hdnea__=[^&]*"; "cookie=" + $jio)
+              .stream_url |= sub("__hdnea__=[^&]*"; $jio)
             elif (.stream_url | test("zee5.com")) then
               .cookie = $zee |
               .stream_url |= sub("hdntl=[^&]*"; $zee)
