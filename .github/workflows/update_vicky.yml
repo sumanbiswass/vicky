@@ -20,13 +20,14 @@ jobs:
       run: |
         # ---- JioTV token (__hdnea__) ----
         curl -sL -o jio.m3u "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u"
-        jio_cookie=$(grep -oP '__hdnea__=[^&]+' jio.m3u | head -n1)
+        # extract __hdnea__=... until & or end of line
+        jio_cookie=$(grep -o '__hdnea__=[^&]*' jio.m3u | head -n1 | sed 's/["\r]//g')
         echo "Jio token: $jio_cookie"
         echo "$jio_cookie" > jio_cookie.txt
 
         # ---- Zee5 token (hdntl) ----
         curl -sL -o zee.m3u "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/z5.m3u"
-        zee_cookie=$(grep -oP 'hdntl=[^&]+' zee.m3u | head -n1)
+        zee_cookie=$(grep -o 'hdntl=[^&]*' zee.m3u | head -n1 | sed 's/["\r]//g')
         echo "Zee token: $zee_cookie"
         echo "$zee_cookie" > zee_cookie.txt
 
@@ -37,10 +38,10 @@ jobs:
 
         jq --arg jio "$jio_cookie" --arg zee "$zee_cookie" '
           map(
-            if (.stream_url | contains("jiotvmblive.cdn.jio.com")) then
+            if (.stream_url | test("jiotvmblive\\.cdn\\.jio\\.com")) then
               .cookie = $jio |
               .stream_url |= sub("__hdnea__=[^&]*"; $jio)
-            elif (.stream_url | contains("zee5.com")) then
+            elif (.stream_url | test("zee5\\.com")) then
               .cookie = $zee |
               .stream_url |= sub("hdntl=[^&]*"; $zee)
             else
