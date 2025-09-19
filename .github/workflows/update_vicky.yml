@@ -1,4 +1,4 @@
-name: Update (__hdnea__) + (hdntl) tokens in vicky.json
+name: Update Jio (__hdnea__) + Zee (hdntl) tokens in vicky.json
 
 on:
   schedule:
@@ -16,30 +16,31 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v2
 
-    - name: Fetch remote playlists and extract tokens
+    - name: Fetch JioTV and Zee5 tokens
       run: |
-        # Fetch JioTV playlist for __hdnea__ token
+        # ---- JioTV token (__hdnea__) ----
         curl -sL -o jio.m3u "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u"
-        jio_cookie=$(grep -oP '__hdnea__=[^&]*' jio.m3u | head -n1)
+        jio_cookie=$(grep -oP '__hdnea__=[^&]+' jio.m3u | head -n1)
+        echo "Jio token: $jio_cookie"
         echo "$jio_cookie" > jio_cookie.txt
 
-        # Fetch playlist for hdntl token
+        # ---- Zee5 token (hdntl) ----
         curl -sL -o zee.m3u "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/z5.m3u"
-        zee_hdntl=$(grep -oP 'hdntl=[^&]*' zee.m3u | head -n1)
-        echo "$zee_hdntl" > zee_hdntl.txt
+        zee_cookie=$(grep -oP 'hdntl=[^&]+' zee.m3u | head -n1)
+        echo "Zee token: $zee_cookie"
+        echo "$zee_cookie" > zee_cookie.txt
 
     - name: Update tokens in vicky.json
       run: |
         jio_cookie=$(cat jio_cookie.txt)
-        zee_hdntl=$(cat zee_hdntl.txt)
+        zee_cookie=$(cat zee_cookie.txt)
 
-        # Update JSON with jq
-        jq --arg jio "$jio_cookie" --arg zee "$zee_hdntl" '
+        jq --arg jio "$jio_cookie" --arg zee "$zee_cookie" '
           map(
-            if (.stream_url | test("jiotvmblive.cdn.jio.com")) then
+            if (.stream_url | contains("jiotvmblive.cdn.jio.com")) then
               .cookie = $jio |
               .stream_url |= sub("__hdnea__=[^&]*"; $jio)
-            elif (.stream_url | test("zee5.com")) then
+            elif (.stream_url | contains("zee5.com")) then
               .cookie = $zee |
               .stream_url |= sub("hdntl=[^&]*"; $zee)
             else
@@ -55,5 +56,6 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git add vicky.json
-        git commit -m "Auto-update __hdnea__ and hdntl tokens in vicky.json" || echo "No changes"
+        git commit -m "Auto-update Jio (__hdnea__) and Zee (hdntl) tokens in vicky.json" || echo "No changes"
         git push
+        
