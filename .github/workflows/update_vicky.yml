@@ -39,7 +39,7 @@ jobs:
         # Use jq to update both tokens (requires jq 1.6+)
         jq --arg jio "$jio_cookie" --arg zee "$zee_hdntl" '
           map(
-            if (.stream_url | test("jiotvmblive.cdn.jio.com")) then
+            if (.stream_url | test("jiotvpllive.cdn.jio.com")) then
               .cookie = $jio |
               .stream_url |= sub("hdnea=[^&]*"; $jio) |
               .stream_url |= sub("cookie=hdnea=[^&]*"; "cookie=" + $jio)
