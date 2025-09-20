@@ -21,9 +21,9 @@ jobs:
         # Fetch JioTV playlist for hdnea token
         # The token is in the URL path, not a query parameter, so we extract it differently
         curl -sL "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u" | \
-        grep -o 'https://jiotvmblive.cdn.jio.com/bpk-tv/\S*m3u8' | \
+        grep -o 'https://jiotvpllive.cdn.jio.com/bpk-tv/\S*m3u8' | \
         head -n1 | \
-        sed -E 's|https://jiotvmblive.cdn.jio.com/bpk-tv/|_hdnea_=|g' | \
+        sed -E 's|https://jiotvpllive.cdn.jio.com/bpk-tv/|_hdnea_=|g' | \
         sed 's|/master.m3u8||g' > jio_cookie.txt
 
         # Fetch playlist for hdntl token
