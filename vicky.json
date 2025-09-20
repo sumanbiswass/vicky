@@ -495,6 +495,15 @@
     "cookie": "__hdnea__=st=1758280064~exp=1758366464~acl=/*~hmac=f828a4bfd62980ef6d3ebd9faf3668b0b73ac7da3322f0c65a8374a96179a356"
   },
   {
+    "id": "687",
+    "title": "News Time TV",
+    "logo_url": "https://jiotvimages.cdn.jio.com/dare_images/images/News_Time_TV.png",
+    "stream_url": "https://jiotvpllive.cdn.jio.com/bpk-tv/News_Time_TV_BTS/output/index.mpd?__hdnea__=st=1758328772~exp=1758415172~acl=/*~hmac=9685e2daff0ec13e9fe2c0a46b87e4debda560433709f38f1ad6f60972d9214a",
+    "license_url": "https://clkey.vercel.app/api/results.php?keyid=7048262f11e55561a9a81d29f06663ba&key=b8c5cacc292a0c04fb5850f8482c672d",
+    "user_agent": "plaYtv/7.1.3 (Linux;Android 13) ygx/69.1 ExoPlayerLib/824.0",
+    "cookie": "__hdnea__=st=1758328772~exp=1758415172~acl=/*~hmac=9685e2daff0ec13e9fe2c0a46b87e4debda560433709f38f1ad6f60972d9214a"
+  },
+  {
     "id": "1145",
     "title": "MTV HD Plus",
     "logo_url": "https://jiotvimages.cdn.jio.com/dare_images/images/MTV_HD_Plus.png",
