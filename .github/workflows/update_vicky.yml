@@ -1,9 +1,9 @@
-name: Update  (hdnea) +  (hdntl) tokens in vicky.json
+name: Update (hdnea) + (hdntl) tokens in vicky.json
 
 on:
   schedule:
-    - cron: '0 */11 * * *'  # every 12 hours
-  workflow_dispatch:
+    - cron: '0 */11 * * *'  # প্রতি 11 ঘন্টায় একবার রান হবে
+  workflow_dispatch:         # ম্যানুয়ালি রান করার অপশন
 
 permissions:
   contents: write
@@ -18,34 +18,28 @@ jobs:
 
     - name: Fetch remote playlists and extract tokens
       run: |
-        # Fetch JioTV playlist for hdnea token
-        # The token is in the URL path, not a query parameter, so we extract it differently
-        curl -sL "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u" | \
-        grep -o 'https://jiotvpllive.cdn.jio.com/bpk-tv/\S*m3u8' | \
-        head -n1 | \
-        sed -E 's|https://jiotvpllive.cdn.jio.com/bpk-tv/|_hdnea_=|g' | \
-        sed 's|/master.m3u8||g' > jio_cookie.txt
+        # --- Fetch JioTV playlist for hdnea token ---
+        curl -sL "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u" \
+        | grep -o 'https://jiotvpllive.cdn.jio.com/bpk-tv/[^"]*' \
+        | head -n1 \
+        | grep -o 'hdnea=[^&]*' \
+        | sed 's/hdnea=//' > jio_hdnea.txt
 
-        # Fetch playlist for hdntl token
+        # --- Fetch Zee5 playlist for hdntl token ---
         curl -sL -o zee.m3u "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/z5.m3u"
-        zee_hdntl=$(grep -o 'hdntl=[^"]*' zee.m3u | head -n1)
-        echo "$zee_hdntl" > zee_hdntl.txt
+        grep -o 'hdntl=[^"]*' zee.m3u | head -n1 | sed 's/hdntl=//' > zee_hdntl.txt
 
     - name: Update tokens in vicky.json
       run: |
-        jio_cookie=$(cat jio_cookie.txt)
-        zee_hdntl=$(cat zee_hdntl.txt)
+        jio_hdnea=$(cat jio_hdnea.txt || echo "")
+        zee_hdntl=$(cat zee_hdntl.txt || echo "")
 
-        # Use jq to update both tokens (requires jq 1.6+)
-        jq --arg jio "$jio_cookie" --arg zee "$zee_hdntl" '
+        jq --arg jio "$jio_hdnea" --arg zee "$zee_hdntl" '
           map(
             if (.stream_url | test("jiotvpllive.cdn.jio.com")) then
-              .cookie = $jio |
-              .stream_url |= sub("hdnea=[^&]*"; $jio) |
-              .stream_url |= sub("cookie=hdnea=[^&]*"; "cookie=" + $jio)
+              .cookie = (if $jio != "" then "hdnea=" + $jio else .cookie end)
             elif (.stream_url | test("zee5.com")) then
-              .cookie = $zee |
-              .stream_url |= sub("hdntl=[^&]*"; $zee)
+              .cookie = (if $zee != "" then "hdntl=" + $zee else .cookie end)
             else
               .
             end
@@ -61,3 +55,4 @@ jobs:
         git add vicky.json
         git commit -m "Auto-update hdnea and hdntl tokens in vicky.json" || echo "No changes"
         git push
+        
