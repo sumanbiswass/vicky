@@ -1,9 +1,9 @@
-name: Update  (__hdnea__) +  (hdntl) tokens in vicky.json
+name: Update  (hdnea) +  (hdntl) tokens in vicky.json
 
 on:
   schedule:
     - cron: '0 */11 * * *'  # every 12 hours
-  workflow_dispatch: 
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -18,10 +18,13 @@ jobs:
 
     - name: Fetch remote playlists and extract tokens
       run: |
-        # Fetch JioTV playlist for __hdnea__ token
-        curl -sL -o jio.m3u "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u"
-        jio_cookie=$(grep -o '__hdnea__=[^"]*' jio.m3u | head -n1)
-        echo "$jio_cookie" > jio_cookie.txt
+        # Fetch JioTV playlist for hdnea token
+        # The token is in the URL path, not a query parameter, so we extract it differently
+        curl -sL "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/jstar.m3u" | \
+        grep -o 'https://jiotvmblive.cdn.jio.com/bpk-tv/\S*m3u8' | \
+        head -n1 | \
+        sed -E 's|https://jiotvmblive.cdn.jio.com/bpk-tv/|_hdnea_=|g' | \
+        sed 's|/master.m3u8||g' > jio_cookie.txt
 
         # Fetch playlist for hdntl token
         curl -sL -o zee.m3u "https://raw.githubusercontent.com/alex8875/m3u/refs/heads/main/z5.m3u"
@@ -38,8 +41,8 @@ jobs:
           map(
             if (.stream_url | test("jiotvmblive.cdn.jio.com")) then
               .cookie = $jio |
-              .stream_url |= sub("__hdnea__=[^&]*"; $jio) |
-              .stream_url |= sub("cookie=__hdnea__=[^&]*"; "cookie=" + $jio)
+              .stream_url |= sub("hdnea=[^&]*"; $jio) |
+              .stream_url |= sub("cookie=hdnea=[^&]*"; "cookie=" + $jio)
             elif (.stream_url | test("zee5.com")) then
               .cookie = $zee |
               .stream_url |= sub("hdntl=[^&]*"; $zee)
@@ -56,5 +59,5 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git add vicky.json
-        git commit -m "Auto-update __hdnea__ and hdntl tokens in vicky.json" || echo "No changes"
+        git commit -m "Auto-update hdnea and hdntl tokens in vicky.json" || echo "No changes"
         git push
